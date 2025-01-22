@@ -6,7 +6,7 @@ export const rowTimeJoin = (user: Users) => {
 
     // Verifica se a data de entrada é válida e não está no futuro
     if (isNaN(joinRowAt.getTime()) || joinRowAt > now) {
-        return 'Data inválida'; // ou 'Ainda não entrou', dependendo do contexto
+        return 'Agora'; // ou 'Ainda não entrou', dependendo do contexto
     }
 
     const diff = now.getTime() - joinRowAt.getTime();
