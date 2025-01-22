@@ -1,0 +1,97 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Business {
+  id               String             @id @default(cuid())
+  name             String             @db.VarChar(255)
+  email            String             @unique @db.VarChar(255)
+  phone            String             @unique @db.VarChar(255)
+  password         String             @db.VarChar(255)
+  cpf              String             @db.VarChar(255)
+  nameBarber       String             @db.VarChar(255)
+  cep              String             @db.VarChar(255)
+  street           String             @db.VarChar(255)
+  numberAddress    String             @db.VarChar(255)
+  city             String             @db.VarChar(255)
+  uf               String             @db.VarChar(255)
+  neighborhood     String             @db.VarChar(255)
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  status           BussinessStatus    @default(Inactive)
+  Row              Row[]
+  Barbers          Barbers[]
+  Users            Users[]
+  FinishedHaircuts FinishedHaircuts[]
+}
+
+enum BussinessStatus {
+  Active
+  Inactive
+  Pending
+}
+
+model Users {
+  id               String             @id @default(cuid())
+  name             String             @db.VarChar(255)
+  phone            String             @unique @db.VarChar(255)
+  email            String?            @unique @db.VarChar(255)
+  rowId            String?
+  row              Row?               @relation(fields: [rowId], references: [id])
+  businessId       String?
+  business         Business?          @relation(fields: [businessId], references: [id])
+  position         Int?               @default(0)
+  rowStatus        RowPositionStatus  @default(Waiting)
+  createdAt        DateTime           @default(now())
+  joinRowAt        DateTime?
+  updatedAt        DateTime           @updatedAt
+  FinishedHaircuts FinishedHaircuts[]
+}
+
+enum RowPositionStatus {
+  InServiced
+  Waiting
+}
+
+model FinishedHaircuts {
+  id         String   @id @default(cuid())
+  userId     String
+  users      Users    @relation(fields: [userId], references: [id])
+  businessId String
+  business   Business @relation(fields: [businessId], references: [id])
+  value      Int?
+  createdAt  DateTime @default(now())
+}
+
+model Barbers {
+  id         String   @id @default(cuid())
+  name       String   @db.VarChar(255)
+  businessId String
+  business   Business @relation(fields: [businessId], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  Row        Row[]
+}
+
+model Row {
+  id         String    @id @default(cuid())
+  businessId String
+  business   Business  @relation(fields: [businessId], references: [id])
+  barberId   String?
+  barber     Barbers?  @relation(fields: [barberId], references: [id])
+  status     RowStatus @default(Inactive)
+  Users      Users[]
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+}
+
+enum RowStatus {
+  Active
+  Inactive
+}
