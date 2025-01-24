@@ -43,6 +43,10 @@ export function AppSidebar({nameBusiness, emailBusiness, ...props }: React.Compo
             title: "Gereciamento",
             url: "/dashboard/fila/gerencia",
           },
+          {
+            title: "QRCode",
+            url: "/dashboard/fila/qrcode",
+          },
         ],
       },
     ],

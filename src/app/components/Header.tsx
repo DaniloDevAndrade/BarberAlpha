@@ -96,7 +96,7 @@ export default function Header() {
               <Link href="/login" className="text-white block px-3 py-2 rounded-md text-base font-medium">
                 Entrar
               </Link>
-              <Link href="/signup" className="text-white block px-3 py-2 rounded-md text-base font-medium">
+              <Link href="/register" className="text-white block px-3 py-2 rounded-md text-base font-medium">
                 Cadastrar
               </Link>
             </div>
