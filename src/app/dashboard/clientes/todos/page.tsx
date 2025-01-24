@@ -16,7 +16,6 @@ import { AppSidebar } from "../../components/app-slidebar"
 import CardTable from "./components/card"
 import { redirect } from "next/navigation"
 import { auth } from "@/auth"
-import { Button } from "@/components/ui/button"
 
 export type BusinessSession = {
   user: {
@@ -53,7 +52,6 @@ export default async function Page() {
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
-            <Button>Locura</Button>
           </div>
         </header>
         <CardTable emailBusiness={emailBusiness}></CardTable>
