@@ -3,7 +3,7 @@
 import { prisma } from "@/database/database"
 import { RowStatus } from "@prisma/client"
 
-export default async function NextUserRow(emailBusiness: string ) {
+export default async function NextUserRow(emailBusiness: string) {
     try {
         const findBusiness = await prisma.business.findUnique({where: {email: emailBusiness}})
 

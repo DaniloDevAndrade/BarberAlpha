@@ -42,7 +42,7 @@ export default function QRCodeFunction({emailBusiness}: UserTableProps){
             <h1 className='mb-5'>Esse QRCode é para clientes entrar sua fila!</h1>
             <QRCode value={link} />
             <div className='mt-5 flex'>
-                <Input className='' value={link}/>
+                <Input className='' value={link} readOnly/>
                 <Button className='ml-3' onClick={handleCopy}>{buttonCopy}</Button>
             </div>
         </div>

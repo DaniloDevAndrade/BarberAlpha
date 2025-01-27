@@ -50,7 +50,7 @@ export default function UserTable({ onRefresh, initialUsers, emailBusiness }: Us
                 <TableCell>{user.phone}</TableCell>
                 <TableCell className='table-status'>{getStatusRow(user.rowStatus as RowPositionStatus)}</TableCell>
                 <TableCell className='table-timeJoin'>{rowTimeJoin(user)}</TableCell>
-            <TableCell><ButtonRemoveRow onRefresh={onRefresh} emailBusiness={emailBusiness} userEmail={user.email as string}/></TableCell>
+                <TableCell><ButtonRemoveRow onRefresh={onRefresh} emailBusiness={emailBusiness} userEmail={user.email as string}/></TableCell>
             </TableRow>
           ))}
         </TableBody>

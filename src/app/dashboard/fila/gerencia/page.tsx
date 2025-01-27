@@ -17,6 +17,7 @@ import { auth } from "@/auth";
 import { AppSidebar } from "../../components/app-slidebar";
 import CardTable from "./components/Card";
 import { BusinessSession } from "../../clientes/todos/page";
+import { Suspense } from "react";
 
 export default async function Page() {
   const session = await auth() as BusinessSession;
@@ -49,7 +50,9 @@ export default async function Page() {
           </div>
         </header>
         <div className="m-1">
-          <CardTable emailBusiness={emailBusiness}></CardTable>
+          <Suspense fallback={<div>Loading...</div>}>
+            <CardTable emailBusiness={emailBusiness}></CardTable>
+          </Suspense>
         </div>
       </SidebarInset>
     </SidebarProvider>

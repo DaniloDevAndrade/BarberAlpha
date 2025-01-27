@@ -13,6 +13,11 @@ export const UserCreateSchemaDashboard = z.object({
     userPhone: z.string().nonempty('Telefone é obrigatório')
 });
 
+export const UserFinallyHairCut = z.object({
+    hairValue: z.string().nonempty('Valor de Corte é obrigatório!'),
+    emailBusiness: z.string().email('Email inválido').nonempty('Email é obrigatório, faça login'),
+});
+
 export const UserQueryCreateSchemaRegister= z.string().nonempty('Id da barbearia é obrigatório')
 
 export const UserRemoveSchemaRow = z.object({

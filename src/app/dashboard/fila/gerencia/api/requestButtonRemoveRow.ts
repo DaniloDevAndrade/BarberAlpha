@@ -69,6 +69,6 @@ export default async function removeUsersRow(body: requestUsersRemoveRow ) {
         const removeUserRow = await prisma.users.update({where: {phone: findUser.phone}, data: dataRemoveUserRow})
         return {success: true, removeUserRow}
         } catch (error) {
-            console.error('Error:', error);
+            return {success: false, error:{message: error}}
         }
 }

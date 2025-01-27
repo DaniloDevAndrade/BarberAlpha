@@ -32,7 +32,7 @@ export default async function requestAddUser(body: BodyTypeNewUser){
                 phone: UserBody.userPhone,
                 email: UserBody.userEmail,
                 rowId: findRow.id,
-                position: position + 1,
+                position: position,
                 businessId: findBusiness.id,
                 joinRowAt: new Date()
             }
@@ -42,7 +42,7 @@ export default async function requestAddUser(body: BodyTypeNewUser){
 
         const updateUser = {
             rowId: findRow.id,
-            position: position + 1,
+            position: position,
             rowStatus: "Waiting" as RowPositionStatus,
             joinRowAt: new Date()
         }

@@ -30,7 +30,7 @@ export async function requestJoinRow(businessId: string, body: BodyType) {
                 phone: UserBody.phone,
                 email: UserBody.email,
                 rowId: findRow.id,
-                position: position + 1,
+                position: position,
                 businessId,
                 joinRowAt: new Date()
             }
@@ -48,7 +48,7 @@ export async function requestJoinRow(businessId: string, body: BodyType) {
 
         const updateUser = {
             rowId: findRow.id,
-            position: position + 1,
+            position: position,
             rowStatus: "Waiting" as RowPositionStatus,
             joinRowAt: new Date()
         }

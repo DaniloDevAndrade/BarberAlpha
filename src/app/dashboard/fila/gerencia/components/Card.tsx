@@ -5,11 +5,12 @@ import { Cog, User, UserRoundCheck, UserRoundPlus, Vibrate } from "lucide-react"
 import UserTable from "./Table"
 import ButtonRow from "./Buttons/ButtonRow"
 import { rowTimeJoin } from "../api/RowTime"
-import ButtonNextUser from "./Buttons/ButtonNextUser"
 import { DialogAddUser } from "./Buttons/ButtonAddUser/ButtonAddUser"
 import { getUsersRow } from "../api/requestUsers"
 import ButtonReflash from "./Buttons/ButtonReflashUsers"
 import { Users } from "@prisma/client"
+import { DialogFinallyUser } from "./Buttons/ButtonFinally/ButtonFinally"
+import ButtonServiceStarted from "./Buttons/ButtonServiceStarted"
 
 type DashboardClientProps = {
   emailBusiness: string;
@@ -73,13 +74,13 @@ export default function CardTable({emailBusiness}: DashboardClientProps) {
         <Card className="">
                 <CardHeader>
                 <div className="flex flex-row justify-between">
-                    <CardTitle className="text-cards text-xl xl:text-sm 2xl:text-lg">Chamar Proximo</CardTitle>
+                    <CardTitle className="text-cards text-xl xl:text-sm 2xl:text-lg">Iniciar Atendimento</CardTitle>
                     <Vibrate />
                 </div>
                 </CardHeader>
                 <CardContent className="justify-self-center">
                     <div className="flex items-center">
-                    <ButtonNextUser emailBusiness={emailBusiness}></ButtonNextUser>
+                    <ButtonServiceStarted onRefresh={fetchUsers} emailBusiness={emailBusiness}/>
                     </div>
                 </CardContent>
         </Card>
@@ -97,6 +98,7 @@ export default function CardTable({emailBusiness}: DashboardClientProps) {
                           <h1>Nome: {users[0].name}</h1>
                           <h1>Cliente desde: {new Date(users[0].createdAt).toLocaleDateString()}</h1>
                           <h1>Tempo de fila: {rowTimeJoin(users[0])}</h1>
+                          <DialogFinallyUser emailBusiness={emailBusiness}/>
                         </>
                     ) : (
                         <h1>Não atendendo.</h1>
