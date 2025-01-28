@@ -16,6 +16,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             },
         })
     ],
+    session: {
+        maxAge: 4*60*60 //4 hours
+    },
     trustHost: true,
     secret: process.env.AUTH_SECRET,
     pages: {
