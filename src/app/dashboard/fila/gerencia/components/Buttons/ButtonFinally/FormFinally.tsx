@@ -28,7 +28,7 @@ export default function FormFinallyUser({emailBusiness}: BodyProp){
 
       const onSubmit = async (values: z.infer<typeof formSchema>) => {
           try {
-              const formattedValues = {...values, value: formatPhoneNumber(values.value).replace(/^R\$\s?/g, '')}
+              const formattedValues = {...values, value: formatMoney(values.value).replace(/^R\$\s?/g, '')}
               const body = {
                 hairValue: formattedValues.value,
                 emailBusiness: emailBusiness as string
@@ -56,7 +56,7 @@ export default function FormFinallyUser({emailBusiness}: BodyProp){
           
         }
 
-        function formatPhoneNumber(value: string) {
+        function formatMoney(value: string) {
           const numbers = value.replace(/\D/g, '')
           if (numbers.length === 0) return 'R$0,00';
           const numericValue = parseFloat(numbers) / 100;
@@ -79,7 +79,7 @@ export default function FormFinallyUser({emailBusiness}: BodyProp){
                         placeholder="R$35,00"
                         {...field}
                         onChange={(e) => {
-                          const formatted = formatPhoneNumber(e.target.value)
+                          const formatted = formatMoney(e.target.value)
                           field.onChange(formatted)
                         }}
                         maxLength={14}

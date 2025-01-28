@@ -4,6 +4,7 @@ import * as React from "react"
 import {
   Bot,
   Settings2,
+  Wallet,
 } from "lucide-react"
 
 import { NavMain } from "./nav-main"
@@ -30,6 +31,23 @@ export function AppSidebar({nameBusiness, emailBusiness, ...props }: React.Compo
           {
             title: "Todos Clientes",
             url: "/dashboard/clientes/todos",
+            isActive: true,
+          },
+        ],
+      },
+      {
+        title: "Financeiro",
+        url: "#",
+        icon: Wallet,
+        items: [
+          {
+            title: "Faturamento",
+            url: "/dashboard/finance",
+            isActive: true,
+          },
+          {
+            title: "Despesas",
+            url: "/dashboard/finance/despesas",
             isActive: true,
           },
         ],

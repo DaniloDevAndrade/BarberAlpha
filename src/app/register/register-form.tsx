@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useState } from "react";
 import { requestRegister } from "./api/requestRegister";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
     name: z.string().min(3, { message: 'Nome completo deve ter pelo menos 3 caracteres' }),
@@ -39,6 +40,8 @@ const formSchema = z.object({
 
 export default function RegisterForm(){
     const [submissionStatus, setSubmissionStatus] = useState<'idle' | 'success' | 'error' | 'errorEmail'>('idle')
+
+    const router = useRouter()
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -130,7 +133,7 @@ export default function RegisterForm(){
             return setSubmissionStatus('errorEmail')
           }
 
-            //router.push('/login')
+            router.push('/login')
             setSubmissionStatus('success')
         } catch (error) {
             setSubmissionStatus('error')

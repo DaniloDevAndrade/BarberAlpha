@@ -11,7 +11,7 @@ model Business {
   id               String             @id @default(cuid())
   name             String             @db.VarChar(255)
   email            String             @unique @db.VarChar(255)
-  phone            String             @unique @db.VarChar(255)
+  phone            String             @db.VarChar(255)
   password         String             @db.VarChar(255)
   cpf              String             @db.VarChar(255)
   nameBarber       String             @db.VarChar(255)
@@ -28,6 +28,7 @@ model Business {
   Barbers          Barbers[]
   Users            Users[]
   FinishedHaircuts FinishedHaircuts[]
+  Costs            Costs[]
 }
 
 enum BussinessStatus {
@@ -67,6 +68,27 @@ model FinishedHaircuts {
   value      String   @db.VarChar(10)
   timeInRow  DateTime
   createdAt  DateTime @default(now())
+}
+
+model Costs {
+  id          String        @id @default(cuid())
+  businessId  String
+  business    Business      @relation(fields: [businessId], references: [id])
+  value       String        @db.VarChar(10)
+  description String        @db.VarChar(255)
+  custsDate   DateTime
+  category    categoryCosts
+  createdAt   DateTime      @default(now())
+}
+
+enum categoryCosts {
+  Aluguel
+  Materiais
+  Salarios
+  Marketing
+  Luz
+  Agua
+  Outros
 }
 
 model Barbers {

@@ -5,6 +5,7 @@ import {
   ChevronsUpDown,
   CreditCard,
   LogOut,
+  SunMoon,
 } from "lucide-react"
 
 import {
@@ -24,6 +25,7 @@ import {
 } from "@/components/ui/sidebar"
 import actionLogout from "../api/logoutActions"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { useRouter } from "next/navigation"
 
 export function NavUser({
   user,
@@ -35,6 +37,7 @@ export function NavUser({
   }
 }) {
   const { isMobile } = useSidebar()
+  const router = useRouter()
 
   return (
     <SidebarMenu>
@@ -75,13 +78,23 @@ export function NavUser({
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={() => {
+                router.push('/dashboard/account')
+              }}>
                 <BadgeCheck />
                 Conta
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={() => {
+                router.push('/dashboard/themes')
+              }}>
+                <SunMoon/>
+                Temas
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => {
+                router.push('/dashboard/billing')
+              }}>
                 <CreditCard />
-                Pagamentos
+                Planos
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
