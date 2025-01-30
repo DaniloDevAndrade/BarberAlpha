@@ -54,7 +54,7 @@ export default async function Page() {
             </Breadcrumb>
           </div>
         </header>
-        <CardTable emailBusiness={emailBusiness}></CardTable>
+        <CardTable emailBusiness={emailBusiness as string}></CardTable>
       </SidebarInset>
     </SidebarProvider>
   )
