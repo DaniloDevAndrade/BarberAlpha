@@ -1,23 +1,38 @@
+'use client'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Suspense} from "react"
-import { Users } from "lucide-react"
+import { Suspense, useEffect, useState} from "react"
+import { Users as UsersIcon } from "lucide-react"
 import { calculateNewUserMonth} from "../api/caculate"
 import UserTable from "./table"
 import { getUsersBusiness } from "../api/getUsersBusiness"
+import Loading from "@/app/components/Loading"
+import { Users } from "@prisma/client"
 
 type DashboardClientProps = {
-  emailBusiness?: string;
+  emailBusiness: string;
   name?: string
 }
 
-export default async function CardTable({emailBusiness}: DashboardClientProps) {
+export default function CardTable({emailBusiness}: DashboardClientProps) {
+    const [users, setUsers] = useState<Users[]>([])
+    const [isLoading, setIsLoading] = useState(true);
 
-    const response = await getUsersBusiness(emailBusiness as string)
-
-    const users = response.users || []
     const totalUsers = users.length
     const newUserAgoMonth = calculateNewUserMonth(users)
-  
+
+    useEffect(() =>{
+      async function fetchUsers() {
+        const res = await getUsersBusiness(emailBusiness)
+        setUsers(res.users || [])
+        setIsLoading(false)
+      }
+      fetchUsers()
+    }, [emailBusiness])
+    
+  if (isLoading) {
+    return (<Loading />);
+  }
+
   return (
     <>
     <div className="flex ml-2 flex-col gap-4 md:flex-row">
@@ -25,7 +40,7 @@ export default async function CardTable({emailBusiness}: DashboardClientProps) {
                 <CardHeader>
                     <div className="flex flex-row justify-between space-x-2">
                       <CardTitle className="text-lg">Total de Clientes</CardTitle>
-                      <Users />
+                      <UsersIcon />
                     </div>
                 </CardHeader>
                 <CardContent className="justify-self-center">
@@ -36,7 +51,7 @@ export default async function CardTable({emailBusiness}: DashboardClientProps) {
                 <CardHeader>
                   <div className="flex flex-row justify-between space-x-2">
                     <CardTitle className="text-lg">Novos Clientes <CardDescription>(Ultimos 30 Dias)</CardDescription></CardTitle>
-                    <Users />
+                    <UsersIcon />
                   </div>
                 </CardHeader>
                 <CardContent className="justify-self-center">

@@ -1,9 +1,10 @@
 'use client'
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import QRCode from 'react-qr-code'
 import { requestQRCode } from '../api/requestID'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
+import Loading from '@/app/components/Loading'
 
 interface UserTableProps {
   emailBusiness: string,
@@ -13,15 +14,16 @@ interface UserTableProps {
 export default function QRCodeFunction({emailBusiness}: UserTableProps){
     const [link, setLink] = useState<string>('')
     const [buttonCopy, setButtonCopy] = useState<string>('Copiar!')
-
-    const fetchBusinessId = useCallback(async () =>{
-        const response = await requestQRCode(emailBusiness)
-        setLink(`https://barberalpha.com/row?businessId=${response.businessId}`)
-    }, [emailBusiness])
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() =>{
-        fetchBusinessId()
-    }, [fetchBusinessId])
+        async function fetchBusiness() {
+            const response = await requestQRCode(emailBusiness)
+            setLink(`https://barberalpha.com/row?businessId=${response.businessId}`)
+            setIsLoading(false)
+        }
+        fetchBusiness()
+    }, [emailBusiness])
 
     const handleCopy = async () => {
         try {
@@ -35,6 +37,10 @@ export default function QRCodeFunction({emailBusiness}: UserTableProps){
             console.error('Falha ao copiar: ', err)
         }
     }
+
+    if (isLoading) {
+        return (<Loading />);
+      }
 
     return(
         <div className='flex flex-col justify-center items-center'>

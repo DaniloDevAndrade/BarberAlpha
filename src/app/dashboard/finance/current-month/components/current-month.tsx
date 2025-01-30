@@ -18,6 +18,7 @@ import {
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { CalculateTotalsMonth, generateDataMonth } from "./requestData"
+import Loading from "@/app/components/Loading"
 
 type BodyProp = {
   emailBusiness: string;
@@ -31,7 +32,7 @@ export default function MesAtualDashboard({emailBusiness}: BodyProp) {
     Lucro: number;
     }[]>([]);
   const [totals, setTotals] = useState({ receitaMes: 0, despesasMes: 0, lucroMes: 0, projecaoMes: 0 })
-
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function Request() {
@@ -39,6 +40,7 @@ export default function MesAtualDashboard({emailBusiness}: BodyProp) {
       const totalData = await CalculateTotalsMonth(emailBusiness)
       setTotals(totalData || { receitaMes: 0, despesasMes: 0, lucroMes: 0, projecaoMes: 0 })
       setData(graficsData || [])
+      setIsLoading(false)
     }
     Request()
   }, [emailBusiness])
@@ -50,6 +52,10 @@ export default function MesAtualDashboard({emailBusiness}: BodyProp) {
   const currentDate = new Date();
   const options: Intl.DateTimeFormatOptions = { month: 'long', year: 'numeric' };
   const formattedDate = currentDate.toLocaleDateString('pt-BR', options);
+
+  if (isLoading) {
+    return (<Loading />);
+  }
 
   return (
     <div className="container mx-auto p-4">

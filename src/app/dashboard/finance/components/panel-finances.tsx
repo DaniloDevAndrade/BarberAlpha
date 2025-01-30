@@ -18,6 +18,7 @@ import {
 import { CalculateTotals, generateMockData } from "./requestData"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import Loading from "@/app/components/Loading"
 
 type BodyProp = {
   emailBusiness: string;
@@ -32,7 +33,7 @@ export default function FinanceDashboard({emailBusiness}: BodyProp) {
     }[]>([]);
     
   const [totals, setTotals] = useState({ receitaTotal: 0, despesasTotal: 0, lucroTotal: 0 })
-  
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function Request() {
@@ -40,12 +41,17 @@ export default function FinanceDashboard({emailBusiness}: BodyProp) {
       const totalData = await CalculateTotals(emailBusiness)
       setTotals(totalData || { receitaTotal: 0, despesasTotal: 0, lucroTotal: 0 })
       setData(graficsData || [])
+      setIsLoading(false)
     }
     Request()
   }, [emailBusiness])
 
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(value)
+  }
+
+  if (isLoading) {
+    return (<Loading />);
   }
 
   return (

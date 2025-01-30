@@ -11,6 +11,7 @@ import ButtonReflash from "./Buttons/ButtonReflashUsers"
 import { Users } from "@prisma/client"
 import { DialogFinallyUser } from "./Buttons/ButtonFinally/ButtonFinally"
 import ButtonServiceStarted from "./Buttons/ButtonServiceStarted"
+import Loading from "@/app/components/Loading"
 
 type DashboardClientProps = {
   emailBusiness: string;
@@ -18,20 +19,25 @@ type DashboardClientProps = {
 }
 
 export default function CardTable({emailBusiness}: DashboardClientProps) {
-
-  const [users, setUsers] = useState<Users[]>([]); // Estado para armazenar os usuários
+  const [isLoading, setIsLoading] = useState(true);
+  const [users, setUsers] = useState<Users[]>([]);
   const [totalUsers, setTotalUsers] = useState(0);
 
   const fetchUsers = useCallback(async () => {
     const response = await getUsersRow(emailBusiness);
     setUsers(response.users ?? []);
     setTotalUsers((response.users ?? []).length);
+    setIsLoading(false);
   }, [emailBusiness])
 
   useEffect(() => {
     fetchUsers();
   }, [fetchUsers]);
   
+  if (isLoading) {
+    return (<Loading />);
+  }
+
   return (
     <>
     <div className="flex ml-4 flex-col gap-4 xl:grid xl:grid-cols-6">

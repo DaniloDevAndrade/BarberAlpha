@@ -16,6 +16,7 @@ import { paginateCosts } from "@/app/dashboard/clientes/todos/api/caculate"
 import { useCallback, useEffect, useState } from "react"
 import { getAllCosts } from "../api/requestGetAllCosts"
 import ButtonRemoveCosts from "./ButtonRemoveCosts"
+import Loading from "@/app/components/Loading"
 
 type BodyProp = {
   emailBusiness: string;
@@ -30,7 +31,7 @@ const formSchema = z.object({
 
 export default function AdicionarDespesa({emailBusiness}: BodyProp) {
   const [costsInitials, setCostsInitials] = useState<Costs[]>([]);
-
+  const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1)
   const pageSize = 10
   const totalPages = Math.ceil(costsInitials.length / pageSize)
@@ -40,6 +41,7 @@ export default function AdicionarDespesa({emailBusiness}: BodyProp) {
   const fetchCosts = useCallback(async () => {
       const response = await getAllCosts(emailBusiness);
       setCostsInitials(response.costs ?? []);
+      setIsLoading(false)
     }, [emailBusiness])
 
   useEffect(() =>{
@@ -82,6 +84,11 @@ export default function AdicionarDespesa({emailBusiness}: BodyProp) {
     if (numbers.length === 0) return 'R$0,00';
     const numericValue = parseFloat(numbers) / 100;
     return `R$${numericValue.toFixed(2).replace('.', ',')}`;
+  }
+
+
+  if (isLoading) {
+    return (<Loading />);
   }
 
   return (
