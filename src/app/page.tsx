@@ -1,50 +1,116 @@
 "use client"
 
 import Header from "./components/Header"
-import { Calendar, Clock, Users, Scissors, ChevronLeft, ChevronRight, Star } from "lucide-react"
-import { useState } from "react"
+import { Calendar, Clock, Users, Scissors, Star, ChevronLeft, ChevronRight } from "lucide-react"
+import { useState, useEffect, useCallback } from "react"
 import Image from "next/image"
 import StarryBackground from "./components/StarryBackgroud"
-import Footer from "./components/Footer"
 
 export default function Home() {
-  const [currentTestimonial, setCurrentTestimonial] = useState(0)
+  const [currentTestimonialIndex, setCurrentTestimonialIndex] = useState(0)
+  const [isAnimating, setIsAnimating] = useState(false)
+  const [animationDirection, setAnimationDirection] = useState<"left" | "right">("right")
 
   const testimonials = [
     {
-      name: "Juliana Castro",
-      barbershop: "Corte e Estilo",
-      text: "O Barber Alpha não é apenas uma ferramenta; é como um membro da equipe! Minhas clientes estão adorando a facilidade de entrar em filas e esperar de casa e eu tenho mais tempo para me dedicar a cada um delas.",
+      name: "João Silva",
+      barbershop: "Barbearia Estilo",
+      text: "Barber Alpha revolucionou minha barbearia. Agora tenho mais tempo para focar no que realmente importa: meus clientes.",
+      image: "/placeholder.svg?height=80&width=80",
     },
     {
-      name: "Marcos Ferreira",
-      barbershop: "Barbearia Arte",
-      text: "Com o Barber Alpha, consegui organizar minhas finanças de forma que nunca pensei ser possível. O stress de perder clientes por conta de filas grandes desapareceu! Meu negócio nunca esteve tão bem!",
+      name: "Maria Oliveira",
+      barbershop: "Corte & Charme",
+      text: "Desde que comecei a usar o Barber Alpha, minha agenda está sempre cheia e organizada. Recomendo a todos os barbeiros!",
+      image: "/placeholder.svg?height=80&width=80",
     },
     {
-      name: "Fernando Costa",
-      barbershop: "Barbearia Clássica",
-      text: "Já experimentei várias plataformas, mas nada se compara ao Barber Alpha. A agilidade no atendimento aumentou e a satisfação dos meus clientes também. Recomendo de olhos fechados!",
+      name: "Carlos Santos",
+      barbershop: "Barba & Cia",
+      text: "A facilidade de uso e a eficiência do Barber Alpha são incomparáveis. Meus clientes adoram poder agendar online a qualquer hora.",
+      image: "/placeholder.svg?height=80&width=80",
     },
     {
-      name: "Lucas Almeida",
-      barbershop: "Barbearia Premium",
-      text: "Com o Barber Alpha, finalmente consegui equilibrar meu tempo. Agora posso atender mais clientes e ainda ter tempo para meu descanso. Muito mais que um aplicativo, uma verdadeira transformação!",
+      name: "Ana Rodrigues",
+      barbershop: "Tesoura de Ouro",
+      text: "O Barber Alpha simplificou minha vida. Gerenciar minha barbearia nunca foi tão fácil e eficiente.",
+      image: "/placeholder.svg?height=80&width=80",
     },
     {
-      name: "Fernanda Gomes",
-      barbershop: "Sobrancelhas e Barba",
-      text: "O Barber Alpha trouxe uma nova vida à minha barbearia! O feedback dos clientes tem sido incrível, e tem sido tão bom ver todos entrando em filas e esperando de CASA! sem qualquer dificuldade. Super recomendo!",
+      name: "Pedro Almeida",
+      barbershop: "Barber Shop Prime",
+      text: "Excelente plataforma! Aumentou significativamente a produtividade da minha barbearia.",
+      image: "/placeholder.svg?height=80&width=80",
     },
-  ];
-  
+  ]
 
-  const nextTestimonial = () => {
-    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)
-  }
+  const moveTestimonials = useCallback(
+    (direction: "left" | "right") => {
+      if (!isAnimating) {
+        setIsAnimating(true)
+        setAnimationDirection(direction)
+        setTimeout(() => {
+          setCurrentTestimonialIndex((prevIndex) => {
+            if (direction === "right") {
+              return (prevIndex + 1) % testimonials.length
+            } else {
+              return (prevIndex - 1 + testimonials.length) % testimonials.length
+            }
+          })
+          setIsAnimating(false)
+        }, 500) // Half of the animation duration
+      }
+    },
+    [isAnimating, testimonials.length],
+  )
 
-  const prevTestimonial = () => {
-    setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)
+  const nextTestimonial = useCallback(() => moveTestimonials("right"), [moveTestimonials])
+  const prevTestimonial = useCallback(() => moveTestimonials("left"), [moveTestimonials])
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      nextTestimonial()
+    }, 5000)
+
+    return () => clearInterval(intervalId)
+  }, [nextTestimonial])
+
+  const renderTestimonial = (index: number) => {
+    const testimonial = testimonials[index]
+    return (
+      <div
+        key={index}
+        className={`bg-gray-800 p-6 rounded-lg shadow-lg h-full flex flex-col justify-between transition-all duration-500 ${
+          isAnimating
+            ? animationDirection === "right"
+              ? "-translate-x-full opacity-0"
+              : "translate-x-full opacity-0"
+            : "translate-x-0 opacity-100"
+        }`}
+      >
+        <div>
+          <div className="flex justify-center mb-4">
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} className="h-6 w-6 text-yellow-400 fill-current" />
+            ))}
+          </div>
+          <p className="text-lg mb-4">{testimonial.text}</p>
+        </div>
+        <div className="flex items-center mt-4">
+          <Image
+            src={testimonial.image || "/placeholder.svg"}
+            alt={testimonial.name}
+            width={80}
+            height={80}
+            className="rounded-full"
+          />
+          <div className="ml-4">
+            <p className="font-bold">{testimonial.name}</p>
+            <p className="text-sm text-gray-400">{testimonial.barbershop}</p>
+          </div>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -57,14 +123,14 @@ export default function Home() {
         <div className="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
           <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">Barber Alpha</h1>
           <p className="mt-6 text-xl text-gray-300 max-w-3xl">
-            Simplifique a fila da sua barbearia. Gerencie clientes, horários e aumente sua eficiência com nossa
+            Simplifique o agendamento da sua barbearia. Gerencie clientes, horários e aumente sua eficiência com nossa
             plataforma intuitiva.
           </p>
           <a
             href="#"
             className="mt-8 bg-indigo-600 border border-transparent rounded-md shadow px-5 py-3 inline-flex items-center text-base font-medium text-white hover:bg-indigo-700"
           >
-            Comece AGORA!
+            Comece gratuitamente
           </a>
         </div>
 
@@ -87,9 +153,9 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="ml-4">
-                    <dt className="text-lg leading-6 font-medium">Fila online</dt>
+                    <dt className="text-lg leading-6 font-medium">Agendamento online</dt>
                     <dd className="mt-2 text-base text-gray-400">
-                      Permita que seus clientes em filas onlines e esperem de casa! através da nossa plataforma intuitiva.
+                      Permita que seus clientes agendem horários 24/7 através da nossa plataforma intuitiva.
                     </dd>
                   </div>
                 </div>
@@ -101,9 +167,9 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="ml-4">
-                    <dt className="text-lg leading-6 font-medium">Gerenciamento de finanças</dt>
+                    <dt className="text-lg leading-6 font-medium">Gerenciamento de horários</dt>
                     <dd className="mt-2 text-base text-gray-400">
-                      Organize facilmente as finanças de sua barbearia e aumente seus lucros!.
+                      Organize facilmente os horários dos seus barbeiros e evite conflitos de agendamento.
                     </dd>
                   </div>
                 </div>
@@ -151,9 +217,10 @@ export default function Home() {
             </div>
             <div className="bg-gray-900 rounded-lg shadow-lg overflow-hidden">
               <picture>
-                <source media="(min-width: 1024px)" srcSet="/dashboard.svg?height=600&width=1200" />
+                <source media="(min-width: 1024px)" srcSet="/placeholder.svg?height=600&width=1200" />
+                <source media="(min-width: 768px)" srcSet="/placeholder.svg?height=450&width=900" />
                 <Image
-                  src="/dashboard3.svg?height=300&width=600"
+                  src="/placeholder.svg?height=300&width=600"
                   alt="Dashboard do Barber Alpha"
                   width={600}
                   height={300}
@@ -175,39 +242,30 @@ export default function Home() {
             </div>
             <div className="relative">
               <div className="overflow-hidden">
-                <div
-                  className="flex flex-col md:flex-row transition-transform duration-300 ease-in-out"
-                  style={{ transform: `translateX(-${currentTestimonial * 100}%)` }}
-                >
-                  {testimonials.map((testimonial, index) => (
-                    <div key={index} className="w-full md:w-1/3 flex-shrink-0 px-4 mb-8 md:mb-0">
-                      <div className="bg-gray-800 p-6 rounded-lg shadow-lg h-full flex flex-col">
-                        <div className="flex justify-center mb-4">
-                          {[...Array(5)].map((_, i) => (
-                            <Star key={i} className="h-6 w-6 text-yellow-400 fill-current" />
-                          ))}
-                        </div>
-                        <p className="text-lg mb-4 flex-grow">{testimonial.text}</p>
-                        <div className="flex items-center">
-                          <div className="ml-4">
-                            <p className="font-bold">{testimonial.name}</p>
-                            <p className="text-sm text-gray-400">{testimonial.barbershop}</p>
-                          </div>
-                        </div>
+                <div className="flex transition-transform duration-500 ease-in-out">
+                  {[0, 1, 2].map((offset) => {
+                    const index = (currentTestimonialIndex + offset) % testimonials.length
+                    return (
+                      <div key={offset} className="w-full md:w-1/3 flex-shrink-0 px-4">
+                        {renderTestimonial(index)}
                       </div>
-                    </div>
-                  ))}
+                    )
+                  })}
                 </div>
               </div>
               <button
                 onClick={prevTestimonial}
-                className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-indigo-600 p-2 rounded-full"
+                className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-indigo-600 p-2 rounded-full text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                aria-label="Depoimentos anteriores"
+                disabled={isAnimating}
               >
                 <ChevronLeft className="h-6 w-6" />
               </button>
               <button
                 onClick={nextTestimonial}
-                className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-indigo-600 p-2 rounded-full"
+                className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-indigo-600 p-2 rounded-full text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                aria-label="Próximos depoimentos"
+                disabled={isAnimating}
               >
                 <ChevronRight className="h-6 w-6" />
               </button>
@@ -224,11 +282,17 @@ export default function Home() {
             </div>
             <div className="space-y-8">
               <div>
-                <h3 className="text-xl font-bold mb-2">Como funciona a fila online?</h3>
+                <h3 className="text-xl font-bold mb-2">Como funciona o agendamento online?</h3>
                 <p className="text-gray-400">
-                  Os clientes podem acessar sua página de fila, apos preencher os dados necessarios ele vai entrar em uma fila online
-                  podendo esperar de casa sua vez de ser chamado, ao chegar sua vez enviaremos uma mensagem no whatsapp para ele se 
-                  dirigir até a barbearia.
+                  Os clientes podem acessar sua página de agendamento, escolher o serviço desejado, selecionar um
+                  barbeiro disponível e marcar um horário conveniente.
+                </p>
+              </div>
+              <div>
+                <h3 className="text-xl font-bold mb-2">Posso personalizar os serviços oferecidos?</h3>
+                <p className="text-gray-400">
+                  Sim, você tem total controle sobre o catálogo de serviços, podendo adicionar, editar ou remover
+                  serviços conforme necessário.
                 </p>
               </div>
               <div>
@@ -239,9 +303,9 @@ export default function Home() {
                 </p>
               </div>
               <div>
-                <h3 className="text-xl font-bold mb-2">Posso gerenciar minha barbearia pelo celular?</h3>
+                <h3 className="text-xl font-bold mb-2">Existe um aplicativo móvel para gerenciar minha barbearia?</h3>
                 <p className="text-gray-400">
-                  Sim, o sistema já foi criado pensando nisso, permitindo que você gerencie sua barbearia de qualquer
+                  Sim, oferecemos aplicativos para iOS e Android, permitindo que você gerencie sua barbearia de qualquer
                   lugar, a qualquer momento.
                 </p>
               </div>
@@ -278,7 +342,12 @@ export default function Home() {
         </div>
       </main>
 
-      <Footer></Footer>
+      <footer className="bg-gray-800 relative z-10">
+        <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+          <p className="text-center text-base text-gray-400">&copy; 2023 Barber Alpha. Todos os direitos reservados.</p>
+        </div>
+      </footer>
     </div>
   )
 }
+

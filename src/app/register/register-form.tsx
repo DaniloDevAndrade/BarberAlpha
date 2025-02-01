@@ -121,8 +121,6 @@ export default function RegisterForm(){
               neighborhood: formattedValues.neighborhood,
           }
 
-          console.log(body)
-
           const response = await requestRegister(body)
 
           if(response.created === false) {

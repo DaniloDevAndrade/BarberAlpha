@@ -1,6 +1,7 @@
 'use server'
 import { prisma } from "@/database/database"
 import { BusinessSchemaRegister } from "@/schemas/BusinessAuthSchema"
+import { createStripeCustomer } from "@/services/stripe"
 import { Prisma } from "@prisma/client"
 import { hashSync } from 'bcrypt-ts'
 
@@ -38,8 +39,13 @@ export async function requestRegister(body: body): Promise<returnRequest>{
         const FindBusiness = await prisma.business.findFirst({where})
         if(FindBusiness) return {errorEmail: true, error:{message: "Email já cadastrado!"}}
 
-        await prisma.business.create({
+        const CreatedBusiness = await prisma.business.create({
              data: BusinessBody
+        })
+
+        await createStripeCustomer({
+            name: CreatedBusiness.name,
+            email: CreatedBusiness.email
         })
 
         return {created: true}

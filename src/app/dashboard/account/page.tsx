@@ -12,12 +12,11 @@ import {
   } from "@/components/ui/sidebar"
   import { redirect } from "next/navigation";
   import { auth } from "@/auth";
-  import { BusinessSession } from "../clientes/todos/page";
   import { AppSidebar } from "../components/app-slidebar";
 import AccountForm from "./components/account-form";
 
   export default async function Page() {
-    const session = await auth() as BusinessSession;
+    const session = await auth()
           if (!session) {
               redirect('/login');
           }

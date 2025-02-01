@@ -12,16 +12,29 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar"
 import { redirect } from "next/navigation";
-import { BusinessSession } from "./clientes/todos/page";
 import { auth } from "@/auth";
+import { planDays } from "./billing/api/planDays";
+import { requestPlan } from "./billing/api/requestPlan";
 
 export default async function Page() {
-  const session = await auth() as BusinessSession;
+  const session = await auth();
         if (!session) {
             redirect('/login');
         }
         const nameBusiness = session.user.name
         const emailBusiness = session.user.email;
+
+  const res = await requestPlan(emailBusiness)  
+  
+  if(res.plan?.name === "free"){
+    const plan = await planDays(emailBusiness)
+
+    if(plan.days?.currentDay as number > 7) {
+      redirect('/dashboard/billing');
+    }
+  }
+  
+
   return (
     <SidebarProvider>
       <AppSidebar emailBusiness={emailBusiness} nameBusiness={nameBusiness} />

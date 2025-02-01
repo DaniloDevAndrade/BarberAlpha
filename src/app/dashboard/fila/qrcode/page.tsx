@@ -15,16 +15,27 @@ import {
   import { redirect } from "next/navigation";
   import { auth } from "@/auth";
   import { AppSidebar } from "../../components/app-slidebar";
-  import { BusinessSession } from "../../clientes/todos/page";
 import QRCodeFunction from "./components/QRCode";
+import { requestPlan } from "../../billing/api/requestPlan";
+import { planDays } from "../../billing/api/planDays";
   
   export default async function Page() {
-    const session = await auth() as BusinessSession;
+    const session = await auth();
           if (!session) {
               redirect('/login');
           }
-          const nameBusiness = session.user.name as string
-          const emailBusiness = session.user.email as string
+          const nameBusiness = session.user.name
+          const emailBusiness = session.user.email
+          
+          const res = await requestPlan(emailBusiness)  
+            
+            if(res.plan?.name === "free"){
+              const plan = await planDays(emailBusiness)
+          
+              if(plan.days?.currentDay as number > 7) {
+                redirect('/dashboard/billing');
+              }
+            }
     return (
       <SidebarProvider>
         <AppSidebar emailBusiness={emailBusiness} nameBusiness={nameBusiness} />

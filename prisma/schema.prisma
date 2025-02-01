@@ -8,27 +8,31 @@ datasource db {
 }
 
 model Business {
-  id               String             @id @default(cuid())
-  name             String             @db.VarChar(255)
-  email            String             @unique @db.VarChar(255)
-  phone            String             @db.VarChar(255)
-  password         String             @db.VarChar(255)
-  cpf              String             @db.VarChar(255)
-  nameBarber       String             @db.VarChar(255)
-  cep              String             @db.VarChar(255)
-  street           String             @db.VarChar(255)
-  numberAddress    String             @db.VarChar(255)
-  city             String             @db.VarChar(255)
-  uf               String             @db.VarChar(255)
-  neighborhood     String             @db.VarChar(255)
-  createdAt        DateTime           @default(now())
-  updatedAt        DateTime           @updatedAt
-  status           BussinessStatus    @default(Inactive)
-  Row              Row[]
-  Barbers          Barbers[]
-  Users            Users[]
-  FinishedHaircuts FinishedHaircuts[]
-  Costs            Costs[]
+  id                       String             @id @default(cuid())
+  name                     String             @db.VarChar(255)
+  email                    String             @unique @db.VarChar(255)
+  phone                    String             @db.VarChar(255)
+  password                 String             @db.VarChar(255)
+  cpf                      String             @db.VarChar(255)
+  nameBarber               String             @db.VarChar(255)
+  cep                      String             @db.VarChar(255)
+  street                   String             @db.VarChar(255)
+  numberAddress            String             @db.VarChar(255)
+  city                     String             @db.VarChar(255)
+  uf                       String             @db.VarChar(255)
+  neighborhood             String             @db.VarChar(255)
+  createdAt                DateTime           @default(now())
+  updatedAt                DateTime           @updatedAt
+  status                   BussinessStatus    @default(Inactive)
+  stripeCustomerId         String?
+  stripeSubscriptionId     String?
+  stripeSubscriptionStatus String?
+  stripePriceId            String?
+  Row                      Row[]
+  Barbers                  Barbers[]
+  Users                    Users[]
+  FinishedHaircuts         FinishedHaircuts[]
+  Costs                    Costs[]
 }
 
 enum BussinessStatus {
