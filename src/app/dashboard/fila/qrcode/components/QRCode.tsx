@@ -16,14 +16,16 @@ export default function QRCodeFunction({emailBusiness}: UserTableProps){
     const [buttonCopy, setButtonCopy] = useState<string>('Copiar!')
     const [isLoading, setIsLoading] = useState(true);
 
+    const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
+
     useEffect(() =>{
         async function fetchBusiness() {
             const response = await requestQRCode(emailBusiness)
-            setLink(`https://barberalpha.com/row?businessId=${response.businessId}`)
+            setLink(`${BASE_URL}/row?businessId=${response.businessId}`)
             setIsLoading(false)
         }
         fetchBusiness()
-    }, [emailBusiness])
+    }, [BASE_URL, emailBusiness])
 
     const handleCopy = async () => {
         try {

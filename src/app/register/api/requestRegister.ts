@@ -2,7 +2,7 @@
 import { prisma } from "@/database/database"
 import { BusinessSchemaRegister } from "@/schemas/BusinessAuthSchema"
 import { createStripeCustomer } from "@/services/stripe"
-import { Prisma } from "@prisma/client"
+import { Prisma, RowStatus } from "@prisma/client"
 import { hashSync } from 'bcrypt-ts'
 
 type body = {
@@ -47,6 +47,13 @@ export async function requestRegister(body: body): Promise<returnRequest>{
             name: CreatedBusiness.name,
             email: CreatedBusiness.email
         })
+
+        const newRow = {
+            businessId: CreatedBusiness.id as string,
+            status: 'Inactive' as RowStatus
+        }
+            
+        await prisma.row.create({data: newRow})
 
         return {created: true}
     } catch (err) {

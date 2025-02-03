@@ -1,7 +1,7 @@
 "use client"
 
 import Header from "./components/Header"
-import { Calendar, Clock, Users, Scissors, Star, ChevronLeft, ChevronRight } from "lucide-react"
+import { Calendar, Users, Scissors, Star, ChevronLeft, ChevronRight, CircleDollarSign } from "lucide-react"
 import { useState, useEffect, useCallback } from "react"
 import Image from "next/image"
 import StarryBackground from "./components/StarryBackgroud"
@@ -16,31 +16,31 @@ export default function Home() {
       name: "João Silva",
       barbershop: "Barbearia Estilo",
       text: "Barber Alpha revolucionou minha barbearia. Agora tenho mais tempo para focar no que realmente importa: meus clientes.",
-      image: "/placeholder.svg?height=80&width=80",
+      image: "/person.png",
     },
     {
       name: "Maria Oliveira",
       barbershop: "Corte & Charme",
       text: "Desde que comecei a usar o Barber Alpha, minha agenda está sempre cheia e organizada. Recomendo a todos os barbeiros!",
-      image: "/placeholder.svg?height=80&width=80",
+      image: "/person3.png",
     },
     {
       name: "Carlos Santos",
       barbershop: "Barba & Cia",
       text: "A facilidade de uso e a eficiência do Barber Alpha são incomparáveis. Meus clientes adoram poder agendar online a qualquer hora.",
-      image: "/placeholder.svg?height=80&width=80",
+      image: "/person2.png",
     },
     {
       name: "Ana Rodrigues",
       barbershop: "Tesoura de Ouro",
       text: "O Barber Alpha simplificou minha vida. Gerenciar minha barbearia nunca foi tão fácil e eficiente.",
-      image: "/placeholder.svg?height=80&width=80",
+      image: "/person4.png",
     },
     {
       name: "Pedro Almeida",
-      barbershop: "Barber Shop Prime",
+      barbershop: "Barbearia Fluxo",
       text: "Excelente plataforma! Aumentou significativamente a produtividade da minha barbearia.",
-      image: "/placeholder.svg?height=80&width=80",
+      image: "/person5.png",
     },
   ]
 
@@ -123,11 +123,11 @@ export default function Home() {
         <div className="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
           <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">Barber Alpha</h1>
           <p className="mt-6 text-xl text-gray-300 max-w-3xl">
-            Simplifique o agendamento da sua barbearia. Gerencie clientes, horários e aumente sua eficiência com nossa
+            Plataforma para o crescimento da sua barbearia. Gerencie clientes, horários, coloque filas dinamicas e aumente sua eficiência com nossa
             plataforma intuitiva.
           </p>
           <a
-            href="#"
+            href="/register"
             className="mt-8 bg-indigo-600 border border-transparent rounded-md shadow px-5 py-3 inline-flex items-center text-base font-medium text-white hover:bg-indigo-700"
           >
             Comece gratuitamente
@@ -153,9 +153,9 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="ml-4">
-                    <dt className="text-lg leading-6 font-medium">Agendamento online</dt>
+                    <dt className="text-lg leading-6 font-medium">Fila dinamica.</dt>
                     <dd className="mt-2 text-base text-gray-400">
-                      Permita que seus clientes agendem horários 24/7 através da nossa plataforma intuitiva.
+                      Sistema de fila dinamica, gerencie sua fila e seu cliente espera no conforto da casa dele.
                     </dd>
                   </div>
                 </div>
@@ -163,13 +163,13 @@ export default function Home() {
                 <div className="flex">
                   <div className="flex-shrink-0">
                     <div className="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
-                      <Clock className="h-6 w-6" />
+                      <CircleDollarSign className="h-6 w-6" />
                     </div>
                   </div>
                   <div className="ml-4">
-                    <dt className="text-lg leading-6 font-medium">Gerenciamento de horários</dt>
+                    <dt className="text-lg leading-6 font-medium">Gerenciamento de financeiro</dt>
                     <dd className="mt-2 text-base text-gray-400">
-                      Organize facilmente os horários dos seus barbeiros e evite conflitos de agendamento.
+                      Organize seu financeiro e evite gastos desnecessarios aumentando seu lucro e profissionalizando sua barbearia.
                     </dd>
                   </div>
                 </div>
@@ -195,9 +195,9 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="ml-4">
-                    <dt className="text-lg leading-6 font-medium">Catálogo de serviços</dt>
+                    <dt className="text-lg leading-6 font-medium">Profissionalize sua barberia</dt>
                     <dd className="mt-2 text-base text-gray-400">
-                      Crie e gerencie facilmente seu catálogo de serviços, incluindo preços e durações.
+                      Com nossa plataforma você profissionaliza sua barbearia e se torna um negocio organizado e lucrativo!
                     </dd>
                   </div>
                 </div>
@@ -217,10 +217,9 @@ export default function Home() {
             </div>
             <div className="bg-gray-900 rounded-lg shadow-lg overflow-hidden">
               <picture>
-                <source media="(min-width: 1024px)" srcSet="/placeholder.svg?height=600&width=1200" />
-                <source media="(min-width: 768px)" srcSet="/placeholder.svg?height=450&width=900" />
+                <source media="(min-width: 768px)" srcSet="/dashboard.png" />
                 <Image
-                  src="/placeholder.svg?height=300&width=600"
+                  src="/dashboard3.svg?height=300&width=600"
                   alt="Dashboard do Barber Alpha"
                   width={600}
                   height={300}
@@ -282,31 +281,23 @@ export default function Home() {
             </div>
             <div className="space-y-8">
               <div>
-                <h3 className="text-xl font-bold mb-2">Como funciona o agendamento online?</h3>
+                <h3 className="text-xl font-bold mb-2">Como funciona a fila dinamica online?</h3>
                 <p className="text-gray-400">
-                  Os clientes podem acessar sua página de agendamento, escolher o serviço desejado, selecionar um
-                  barbeiro disponível e marcar um horário conveniente.
+                  Os clientes podem acessar sua página da fila atraves do QRCode ou Link, apos entrar nela o barbeiro terá ela em seu painel
+                  quando chegar a vez do cliente o barbeiro irá chamar ele no painel e de imediato chegara uma mensagem em seu whatsapp para se deslocar até
+                  a barbearia e realizar seu corte.
                 </p>
               </div>
               <div>
-                <h3 className="text-xl font-bold mb-2">Posso personalizar os serviços oferecidos?</h3>
+                <h3 className="text-xl font-bold mb-2">Como funciona o painel financeiro?</h3>
                 <p className="text-gray-400">
-                  Sim, você tem total controle sobre o catálogo de serviços, podendo adicionar, editar ou remover
-                  serviços conforme necessário.
+                  O painel financeiro é baseado nas suas depesas que você pode registrar na aba Despesas e os valores de entrada é de acordo com a finalização de seus cortes, colocando o valor final.
                 </p>
               </div>
               <div>
-                <h3 className="text-xl font-bold mb-2">Como o Barber Alpha ajuda a evitar conflitos de horários?</h3>
+                <h3 className="text-xl font-bold mb-2">Posso utilizar o celular para gerenciar minha barbearia?</h3>
                 <p className="text-gray-400">
-                  Nosso sistema atualiza automaticamente a disponibilidade em tempo real, garantindo que não haja
-                  sobreposição de agendamentos.
-                </p>
-              </div>
-              <div>
-                <h3 className="text-xl font-bold mb-2">Existe um aplicativo móvel para gerenciar minha barbearia?</h3>
-                <p className="text-gray-400">
-                  Sim, oferecemos aplicativos para iOS e Android, permitindo que você gerencie sua barbearia de qualquer
-                  lugar, a qualquer momento.
+                Sim, o sistema do Barber Alpha foi criado justamente pensando nisso. Você tem total controle do sistema de sua barberia pelo celular!
                 </p>
               </div>
             </div>
@@ -317,13 +308,13 @@ export default function Home() {
         <div className="bg-indigo-700">
           <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-24 lg:px-8 lg:flex lg:items-center lg:justify-between">
             <h2 className="text-3xl font-extrabold tracking-tight text-white md:text-4xl">
-              <span className="block">Pronto para simplificar sua barbearia?</span>
-              <span className="block text-indigo-200">Comece a usar o Barber Alpha hoje.</span>
+              <span className="block">Pronto para alavancar sua barbearia?</span>
+              <span className="block text-indigo-200">Começa utilizar os 7 dias gratis do Barber Alpha.</span>
             </h2>
             <div className="mt-8 flex flex-col sm:flex-row lg:mt-0 lg:flex-shrink-0">
               <div className="inline-flex rounded-md shadow">
                 <a
-                  href="#"
+                  href="/register"
                   className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50"
                 >
                   Comece agora

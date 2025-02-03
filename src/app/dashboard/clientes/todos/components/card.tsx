@@ -6,7 +6,7 @@ import { calculateNewUserMonth} from "../api/caculate"
 import UserTable from "./table"
 import { getUsersBusiness } from "../api/getUsersBusiness"
 import Loading from "@/app/components/Loading"
-import { Users } from "@prisma/client"
+import { UserAll } from "./types"
 
 type DashboardClientProps = {
   emailBusiness: string;
@@ -14,7 +14,7 @@ type DashboardClientProps = {
 }
 
 export default function CardTable({emailBusiness}: DashboardClientProps) {
-    const [users, setUsers] = useState<Users[]>([])
+    const [users, setUsers] = useState<UserAll[]>([])
     const [isLoading, setIsLoading] = useState(true);
 
     const totalUsers = users.length
@@ -23,6 +23,7 @@ export default function CardTable({emailBusiness}: DashboardClientProps) {
     useEffect(() =>{
       async function fetchUsers() {
         const res = await getUsersBusiness(emailBusiness)
+        console.log(res)
         setUsers(res.users || [])
         setIsLoading(false)
       }

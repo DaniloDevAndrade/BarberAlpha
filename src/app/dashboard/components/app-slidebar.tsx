@@ -41,8 +41,13 @@ export function AppSidebar({nameBusiness, emailBusiness, ...props }: React.Compo
         icon: Wallet,
         items: [
           {
-            title: "Faturamento",
+            title: "Faturamento Anual",
             url: "/dashboard/finance",
+            isActive: true,
+          },
+          {
+            title: "Faturamento Mensal",
+            url: "/dashboard/finance/current-month",
             isActive: true,
           },
           {

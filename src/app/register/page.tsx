@@ -20,7 +20,7 @@ export default async function Auth() {
       <Card className="w-[1500px] h-[1550px] m-3">
         <CardHeader className="flex flex-col items-center">
           <CardTitle className="text-3xl">Comece aqui</CardTitle>
-          <CardDescription className="text-base">Vamos organizar sua barbearia!</CardDescription>
+          <CardDescription className="text-base">Teste Gratis por 7 Dias!</CardDescription>
         </CardHeader>
         <CardContent>
           <RegisterForm />

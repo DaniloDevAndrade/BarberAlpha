@@ -1,4 +1,5 @@
 import { Costs, Users } from "@prisma/client";
+import { UserAll } from "../components/types";
 
   export function calculateNewUserPercentage(users: Users[]): number {
     const now = new Date();
@@ -13,7 +14,11 @@ import { Costs, Users } from "@prisma/client";
     return newUsers.length;
   }
   
-  export function paginateUsers(users: Users[], page: number, pageSize: number): Users[] {
+  export function paginateAllUsers(users: UserAll[], page: number, pageSize: number) {
+    const startIndex = (page - 1) * pageSize;
+    return (Array.isArray(users) ? users : []).slice(startIndex, startIndex + pageSize);
+  }
+  export function paginateUsers(users: Users[], page: number, pageSize: number) {
     const startIndex = (page - 1) * pageSize;
     return (Array.isArray(users) ? users : []).slice(startIndex, startIndex + pageSize);
   }

@@ -3,6 +3,8 @@ import {
     BreadcrumbItem,
     BreadcrumbLink,
     BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator,
   } from "@/components/ui/breadcrumb"
   import { Separator } from "@/components/ui/separator"
   import {
@@ -47,6 +49,10 @@ import { planDays } from "../../billing/api/planDays";
                     <BreadcrumbLink href="#">
                       Financeiro
                     </BreadcrumbLink>
+                  </BreadcrumbItem>
+                  <BreadcrumbSeparator className="hidden md:block" />
+                  <BreadcrumbItem>
+                    <BreadcrumbPage>Mensal</BreadcrumbPage>
                   </BreadcrumbItem>
                 </BreadcrumbList>
               </Breadcrumb>

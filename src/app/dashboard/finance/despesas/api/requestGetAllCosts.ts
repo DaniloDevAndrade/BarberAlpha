@@ -13,7 +13,7 @@ export async function getAllCosts(emailBusiness: string){
         const costs = await prisma.costs.findMany({
             where: 
             {businessId: findBusiness.id}
-        , orderBy: {custsDate: 'asc'}})
+        , orderBy: {custsDate: 'desc'}})
 
         return { success: true, costs }
 

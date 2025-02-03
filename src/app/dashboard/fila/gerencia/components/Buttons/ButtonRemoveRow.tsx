@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import removeUsersRow from "../../api/requestButtonRemoveRow";
+import { UserRoundX } from "lucide-react";
 
 type BodyProp = {
     emailBusiness: string;
@@ -26,6 +27,6 @@ export default function ButtonRemoveRow({onRefresh, emailBusiness, userEmail}: B
         }
     }
     return(
-        <Button className='' variant="destructive" onClick={handleSubmitCreateRow}>Remover</Button>
+        <Button className='' variant="destructive" onClick={handleSubmitCreateRow}><UserRoundX></UserRoundX>Remover</Button>
     )
 }

@@ -37,13 +37,13 @@ export const generateDataMonth = async (emailBusiness: string) => {
       businessId: findBusiness.id
     },
     select: {
-      timeInRow: true,
+      createdAt: true,
       value: true 
     }
   });
   
   finishedHaircuts.forEach(haircut => {
-    const date = new Date(haircut.timeInRow);
+    const date = new Date(haircut.createdAt);
     
     if (date.getFullYear() === today.getFullYear() && date.getMonth() === today.getMonth()) {
       const day = date.getDate();

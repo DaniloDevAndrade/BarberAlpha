@@ -7,6 +7,7 @@ import ButtonRemoveRow from './Buttons/ButtonRemoveRow'
 import { RowPositionStatus, Users } from '@prisma/client'
 import { rowTimeJoin } from '../api/RowTime'
 import { paginateUsers } from '@/app/dashboard/clientes/todos/api/caculate'
+import ButtonSendMessage from './Buttons/ButtonSendMessage'
 
 interface UserTableProps {
   initialUsers: Users[],
@@ -40,6 +41,9 @@ export default function UserTable({ onRefresh, initialUsers, emailBusiness }: Us
             <TableHead>Telefone</TableHead>
             <TableHead>Status</TableHead>
             <TableHead>Tempo de fila</TableHead>
+            <TableHead>Remover Usuario</TableHead>
+            <TableHead>Enviar Mensagem</TableHead>
+            <TableHead>Ultima Mensagem</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -51,6 +55,8 @@ export default function UserTable({ onRefresh, initialUsers, emailBusiness }: Us
                 <TableCell className='table-status'>{getStatusRow(user.rowStatus as RowPositionStatus)}</TableCell>
                 <TableCell className='table-timeJoin'>{rowTimeJoin(user)}</TableCell>
                 <TableCell><ButtonRemoveRow onRefresh={onRefresh} emailBusiness={emailBusiness} userEmail={user.email as string}/></TableCell>
+                <TableCell><ButtonSendMessage onRefresh={onRefresh} userPhone={user.phone as string}/></TableCell>
+                <TableCell className='table-timeJoin'>{rowTimeJoin(user)}</TableCell>
             </TableRow>
           ))}
         </TableBody>

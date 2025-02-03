@@ -17,6 +17,7 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar"
+import Link from "next/link"
 
 export function NavMain({
   items,
@@ -34,10 +35,10 @@ export function NavMain({
 }) {
   return (
     <SidebarGroup >
-      <div className="flex flex-row mt-3">
+      <Link href="/dashboard" className="flex flex-row mt-3">
         <Scissors className="h-8 w-auto tracking-tight" />
         <SidebarGroupLabel className="ml-1 text-lg font-extrabold tracking-tight lg:block lg:text-2xl mb-5">Barber Alpha</SidebarGroupLabel>
-      </div>
+      </Link>
       <SidebarMenu>
         {items.map((item) => (
           <Collapsible

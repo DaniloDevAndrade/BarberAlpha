@@ -54,6 +54,7 @@ model Users {
   rowStatus        RowPositionStatus  @default(Waiting)
   createdAt        DateTime           @default(now())
   joinRowAt        DateTime?
+  lastCall         DateTime?
   updatedAt        DateTime           @updatedAt
   FinishedHaircuts FinishedHaircuts[]
 }

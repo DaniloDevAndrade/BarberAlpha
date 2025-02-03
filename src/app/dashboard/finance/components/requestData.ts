@@ -29,13 +29,13 @@ export const generateMockData = async (emailBusiness: string) => {
       businessId: findBusiness.id
     },
     select: {
-      timeInRow: true,
+      createdAt: true,
       value: true 
     }
   });
   
   finishedHaircuts.forEach(haircut => {
-    const date = new Date(haircut.timeInRow);
+    const date = new Date(haircut.createdAt);
     const month = date.getMonth();
 
     const value = parseFloat(haircut.value);
