@@ -39,8 +39,8 @@ export default function CardTable({emailBusiness}: DashboardClientProps) {
   }
 
   return (
-    <>
-    <div className="flex ml-4 flex-col gap-4 xl:grid xl:grid-cols-6">
+    <div className="w-screen">
+    <div className="flex m-3 flex-col gap-4 xl:grid xl:grid-cols-6">
         <Card>
                 <CardHeader>
                 <div className="flex flex-row justify-between">
@@ -113,7 +113,7 @@ export default function CardTable({emailBusiness}: DashboardClientProps) {
                 </CardContent>
         </Card>
     </div>
-    <div className="ml-4 mt-4">
+    <div className="m-3">
     <Card>
         <CardHeader>
           <CardTitle className="">Usuarios na fila 
@@ -126,7 +126,7 @@ export default function CardTable({emailBusiness}: DashboardClientProps) {
         </CardContent>
       </Card>
     </div>
-    </>
+    </div>
   )
 }
 

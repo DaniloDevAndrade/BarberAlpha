@@ -35,9 +35,9 @@ export default function CardTable({emailBusiness}: DashboardClientProps) {
   }
 
   return (
-    <>
+    <div className="w-screen">
     <div className="flex ml-2 flex-col gap-4 md:flex-row">
-        <Card className="">
+        <Card className="m-3">
                 <CardHeader>
                     <div className="flex flex-row justify-between space-x-2">
                       <CardTitle className="text-lg">Total de Clientes</CardTitle>
@@ -48,7 +48,7 @@ export default function CardTable({emailBusiness}: DashboardClientProps) {
                     <p className="text-2xl font-bold">{totalUsers}</p>
                 </CardContent>
                 </Card>
-                <Card className="">
+                <Card className="min-w-screen m-3">
                 <CardHeader>
                   <div className="flex flex-row justify-between space-x-2">
                     <CardTitle className="text-lg">Novos Clientes <CardDescription>(Ultimos 30 Dias)</CardDescription></CardTitle>
@@ -60,8 +60,8 @@ export default function CardTable({emailBusiness}: DashboardClientProps) {
                 </CardContent>
               </Card>
     </div>
-    <div>
-    <Card className="ml-2">
+    <div className="">
+    <Card className="m-3">
         <CardHeader>
           <CardTitle>Tabela de Clientes</CardTitle>
         </CardHeader>
@@ -72,7 +72,7 @@ export default function CardTable({emailBusiness}: DashboardClientProps) {
         </CardContent>
       </Card>
     </div>
-    </>
+    </div>
   )
 }
 
