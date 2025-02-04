@@ -14,7 +14,8 @@ export async function requestButtonFinally(body: BodyTypeNewUser) {
         const dataRemoveUserRow = {
                     rowId: null,
                     position: null,
-                    rowStatus: "Waiting" as RowPositionStatus
+                    rowStatus: "Waiting" as RowPositionStatus,
+                    lastCall: null
         }
 
         const {emailBusiness, hairValue} = UserFinallyHairCut.parse(body)

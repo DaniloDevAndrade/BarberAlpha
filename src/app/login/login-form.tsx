@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import loginAction from "./api/loginAction";
 import Link from "next/link";
+import LoadingConfirmation from "../components/ButtonLoading";
 
 const formSchema = z.object({
   email: z.string().email({ message: 'E-mail inválido. Use o formato email@email.com' }),
@@ -18,6 +19,8 @@ const formSchema = z.object({
 export default function LoginForm(){
     const [submissionStatus, setSubmissionStatus] = useState<'idle' | 'success' | 'error'>('idle')
     const [errorMessage, setErrorMessage] = useState<string>('')
+    const [loading, setLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
 
     const form = useForm<z.infer<typeof formSchema>>({
             resolver: zodResolver(formSchema),
@@ -30,23 +33,22 @@ export default function LoginForm(){
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
       try {
         const formattedValues = {...values}
-    
+        setLoading(true)
           const body = {
             email: formattedValues.email as string,
             password: formattedValues.password as string
           }
           const response = await loginAction(body)
 
-          console.log(response)
-
           if(response?.success === false){
             setErrorMessage(response.message)
+            setLoading(false)
             return setSubmissionStatus('error')
           }
-    
-          setSubmissionStatus('success')
+          setIsLoading(false)
           } catch (error) {
                 setSubmissionStatus('error')
+                setLoading(false)
                 console.log(error)
           }
             
@@ -79,7 +81,9 @@ export default function LoginForm(){
               </FormControl>
             </FormItem>
           )} />
-        <Button className="justify-center mt-5 bg-indigo-600 text-white hover:bg-indigo-700" type="submit">Entrar</Button>
+          {!loading ? (<Button className="justify-center mt-5 bg-indigo-600 text-white hover:bg-indigo-700" type="submit">Entrar</Button>): 
+          (<LoadingConfirmation isLoading={isLoading}></LoadingConfirmation>)}
+        
       </form>
       
       <div className="mt-5 flex flex-col items-center">

@@ -62,7 +62,8 @@ export async function requestRemoveRow(phone: string) {
         const dataRemoveUserRow = {
             rowId: null,
             position: null,
-            rowStatus: "Waiting" as RowPositionStatus
+            rowStatus: "Waiting" as RowPositionStatus,
+            lastCall: null
         }
 
         const removeUserRow = await prisma.users.update({where: {phone: findUser.phone}, data: dataRemoveUserRow})

@@ -17,7 +17,7 @@ export default async function Auth() {
         <StarryBackground />
         <Header />
       <div className="flex items-center justify-center mt-24">
-      <Card className="w-[1500px] h-[1550px] m-3">
+      <Card className="w-[1500px] h-auto m-3">
         <CardHeader className="flex flex-col items-center">
           <CardTitle className="text-3xl">Comece aqui</CardTitle>
           <CardDescription className="text-base">Teste Gratis por 7 Dias!</CardDescription>

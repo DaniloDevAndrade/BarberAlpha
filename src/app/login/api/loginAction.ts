@@ -23,6 +23,5 @@ export default async function loginAction(body: BodyLogin) {
         }
         return {success: false, message: 'Ops algum erro aconteceu!'}
     }
-    
     redirect('/dashboard')
 }

@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { requestButtonFinally } from "../../../api/requestButtonFinally";
+import { toast } from "@/hooks/use-toast";
 
 type BodyProp = {
     emailBusiness: string;
@@ -42,13 +43,21 @@ export default function FormFinallyUser({emailBusiness}: BodyProp){
 
               if(result.error){
                 console.log(result.error.message)
+                toast({
+                  title: "Ops algum erro ocorreu!",
+                  description: `Motivo: ${result.error.message}!`,
+                })
                 return setSubmissionStatus('error')
               }
 
               setSubmissionStatus('success')
+              toast({
+                title: "Corte Finalizado com sucesso!",
+                description: `Corte foi finalizado com sucesso!`,
+              })
               setTimeout(() =>{
                 window.location.reload()
-              }, 1000)
+              }, 2000)
           } catch (error) {
               setSubmissionStatus('error')
               console.log(error)

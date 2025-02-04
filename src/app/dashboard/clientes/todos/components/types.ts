@@ -14,6 +14,7 @@ export interface UserAll {
     position: number | null
     rowStatus: RowPositionStatus
     createdAt: Date
+    lastCall: Date | null
     joinRowAt: Date | null
     updatedAt: Date
     FinishedHaircuts: FinishedHaircuts[]

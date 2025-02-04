@@ -15,6 +15,7 @@ import { redirect } from "next/navigation";
 import { auth } from "@/auth";
 import { planDays } from "./billing/api/planDays";
 import { requestPlan } from "./billing/api/requestPlan";
+import InitialDashboard from "../components/InitialDashboard";
 
 export default async function Page() {
   const session = await auth();
@@ -54,6 +55,7 @@ export default async function Page() {
             </Breadcrumb>
           </div>
         </header>
+        <InitialDashboard></InitialDashboard>
       </SidebarInset>
     </SidebarProvider>
   )

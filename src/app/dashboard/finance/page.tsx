@@ -47,7 +47,7 @@ import { planDays } from "../billing/api/planDays";
                 <BreadcrumbList>
                   <BreadcrumbItem className="hidden md:block">
                     <BreadcrumbLink href="#">
-                      Fila
+                      Financeiro
                     </BreadcrumbLink>
                   </BreadcrumbItem>
                   <BreadcrumbSeparator className="hidden md:block" />

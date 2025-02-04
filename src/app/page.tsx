@@ -320,14 +320,14 @@ export default function Home() {
                   Comece agora
                 </a>
               </div>
-              <div className="mt-3 sm:mt-0 sm:ml-3 inline-flex rounded-md shadow">
+              {/* <div className="mt-3 sm:mt-0 sm:ml-3 inline-flex rounded-md shadow">
                 <a
                   href="#"
                   className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
                 >
                   Saiba mais
                 </a>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

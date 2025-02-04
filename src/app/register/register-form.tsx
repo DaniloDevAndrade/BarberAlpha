@@ -9,6 +9,7 @@ import { z } from "zod";
 import { useState } from "react";
 import { requestRegister } from "./api/requestRegister";
 import { useRouter } from "next/navigation";
+import LoadingConfirmation from "../components/ButtonLoading";
 
 const formSchema = z.object({
     name: z.string().min(3, { message: 'Nome completo deve ter pelo menos 3 caracteres' }),
@@ -40,6 +41,8 @@ const formSchema = z.object({
 
 export default function RegisterForm(){
     const [submissionStatus, setSubmissionStatus] = useState<'idle' | 'success' | 'error' | 'errorEmail'>('idle')
+    const [loading, setLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
 
     const router = useRouter()
 
@@ -104,7 +107,9 @@ export default function RegisterForm(){
 
       const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
+            setLoading(true)
             const formattedValues = {...values, phone: formatPhoneNumber(values.phone).replace(/\D/g, '')}
+
 
             const body = {
               name: formattedValues.name,
@@ -128,13 +133,20 @@ export default function RegisterForm(){
           }
 
           if(response.errorEmail === true) {
+            setLoading(false)
             return setSubmissionStatus('errorEmail')
           }
 
-            router.push('/login')
-            setSubmissionStatus('success')
+          if(response.created === true){
+            setIsLoading(false)
+            setTimeout(()=>{
+              router.push('/login')
+            }, 1500)
+          }
+
         } catch (error) {
             setSubmissionStatus('error')
+            setLoading(false)
             console.log(error)
         }
         
@@ -359,12 +371,10 @@ export default function RegisterForm(){
               </FormItem>
           )}
       />
-
-        <Button type="submit">Registrar Barbearia</Button>
+        {!loading ? (<Button type="submit">Registrar Barbearia</Button>): 
+        (<LoadingConfirmation isLoading={isLoading}></LoadingConfirmation>)}
+        
       </form>
-      {submissionStatus === 'success' && (
-        <p className="mt-4 text-green-600">Barbearia registrada com sucesso!</p>
-      )}
       {submissionStatus === 'error' && (
         <p className="mt-4 text-red-600">Erro ao registrar. Tente novamente.</p>
       )}

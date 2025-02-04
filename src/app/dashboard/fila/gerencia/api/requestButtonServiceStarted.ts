@@ -28,7 +28,7 @@ export default async function ServiceStartedRow(emailBusiness: string ) {
         
         const CallNextUserRow = await prisma.users.update({where: {phone: findUser.phone}, data: dataCallUser})
 
-        return {successs: true, user: CallNextUserRow}
+        return {success: true, user: CallNextUserRow}
     } catch (error) {
         console.error('Error:', error);
         return {success: false, error:{message: error}}

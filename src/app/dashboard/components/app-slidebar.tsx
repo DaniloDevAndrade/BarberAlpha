@@ -25,7 +25,7 @@ export function AppSidebar({nameBusiness, emailBusiness, ...props }: React.Compo
     navMain: [
       {
         title: "Clientes",
-        url: "#",
+        url: "/dashboard/clientes/todos",
         icon: Bot,
         items: [
           {
@@ -37,7 +37,7 @@ export function AppSidebar({nameBusiness, emailBusiness, ...props }: React.Compo
       },
       {
         title: "Financeiro",
-        url: "#",
+        url: "/dashboard/finance/current-mont",
         icon: Wallet,
         items: [
           {
@@ -59,7 +59,7 @@ export function AppSidebar({nameBusiness, emailBusiness, ...props }: React.Compo
       },
       {
         title: "Fila",
-        url: "#",
+        url: "/dashboard/fila/gerencia",
         icon: Settings2,
         items: [
           {

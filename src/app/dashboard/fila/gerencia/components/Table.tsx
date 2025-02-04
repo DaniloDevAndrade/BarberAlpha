@@ -5,7 +5,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Button } from "@/components/ui/button"
 import ButtonRemoveRow from './Buttons/ButtonRemoveRow'
 import { RowPositionStatus, Users } from '@prisma/client'
-import { rowTimeJoin } from '../api/RowTime'
+import { callTimeJoin, rowTimeJoin } from '../api/RowTime'
 import { paginateUsers } from '@/app/dashboard/clientes/todos/api/caculate'
 import ButtonSendMessage from './Buttons/ButtonSendMessage'
 
@@ -54,9 +54,9 @@ export default function UserTable({ onRefresh, initialUsers, emailBusiness }: Us
                 <TableCell>{user.phone}</TableCell>
                 <TableCell className='table-status'>{getStatusRow(user.rowStatus as RowPositionStatus)}</TableCell>
                 <TableCell className='table-timeJoin'>{rowTimeJoin(user)}</TableCell>
-                <TableCell><ButtonRemoveRow onRefresh={onRefresh} emailBusiness={emailBusiness} userEmail={user.email as string}/></TableCell>
-                <TableCell><ButtonSendMessage onRefresh={onRefresh} userPhone={user.phone as string}/></TableCell>
-                <TableCell className='table-timeJoin'>{rowTimeJoin(user)}</TableCell>
+                <TableCell><ButtonRemoveRow onRefresh={onRefresh} emailBusiness={emailBusiness} user={user}/></TableCell>
+                <TableCell><ButtonSendMessage onRefresh={onRefresh} user={user} emailBusiness={emailBusiness}/></TableCell>
+                <TableCell className='table-timeJoin'>{callTimeJoin(user)}</TableCell>
             </TableRow>
           ))}
         </TableBody>

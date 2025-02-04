@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import requestAddUser from "../../../api/requestAddUser";
+import { toast } from "@/hooks/use-toast";
 
 type BodyProp = {
     emailBusiness: string;
@@ -47,13 +48,21 @@ export default function FormAddUser({emailBusiness}: BodyProp){
 
               if(result.error){
                 console.log(result.error.message)
+                toast({
+                  title: "Ops algum erro ocorreu!",
+                  description: `Motivo: ${result.error.message}!`,
+                })
                 return setSubmissionStatus('error')
               }
 
               setSubmissionStatus('success')
+              toast({
+                title: "Usuario Adicionado com sucesso!",
+                description: `${result.User?.name} Foi adicionado a fila com sucesso!`,
+              })
               setTimeout(() =>{
                 window.location.reload()
-              }, 1000)
+              }, 2000)
           } catch (error) {
               setSubmissionStatus('error')
               console.log(error)
