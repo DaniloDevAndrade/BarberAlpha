@@ -4,8 +4,10 @@ import { prisma } from "@/database/database"
 import { Prisma, Users } from "@prisma/client"
 
 export default async function requestSendMessage(user: Users, emailBusiness:string){
-    const number = `55${user.phone}@c.us`
+    const number = `55${user.phone}`
     const BASE_WHATS_URL = process.env.NEXT_PUBLIC_BASE_URL_WHATSAPP
+    const WHATS_API_KEY = process.env.WHATSAPP_API_KEY
+    const NAME_WHATSAPP = process.env.NEXT_PUBLIC_NAME_WHATSAPP
 
     try {
         const where: Prisma.BusinessWhereInput = {}
@@ -15,9 +17,8 @@ export default async function requestSendMessage(user: Users, emailBusiness:stri
         if(!findBusiness) return {success: false, error:{message: "Barbearia não encontrada, faça login!"}}
 
         const bodySend = {
-            args: {
-                to: number,
-                content: `Ei, *${user.name}* Sua vez chegou! 💈
+                number: number,
+                text: `Ei, *${user.name}* Sua vez chegou! 💈
 
 👉 Sua cadeira está pronta e o barbeiro preparado  para transformar seu visual
 
@@ -28,12 +29,12 @@ Venha para *${findBusiness.nameBarber}* que estamos te aguardando! ✂️
 Endereço: *${findBusiness.street}, ${findBusiness.numberAddress} - ${findBusiness.neighborhood} - ${findBusiness.city}*.
 
 *Equipe da ${findBusiness.nameBarber} 💈*`
-            }
 }
-        const res = await fetch(`${BASE_WHATS_URL}/sendText`,{
+        const res = await fetch(`${BASE_WHATS_URL}/message/sendText/${NAME_WHATSAPP}`,{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'apikey': `${WHATS_API_KEY}`
             },
             body: JSON.stringify(bodySend)
         }).then(res => res.json())
