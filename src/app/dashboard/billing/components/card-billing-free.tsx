@@ -83,6 +83,7 @@ export default function CardBillingFree({emailBusiness, plan}: ClientProps){
     useEffect(() => {
         async function requestPlanEffect() {
             const res = await planDays(emailBusiness)
+            console.log(res)
             setDays(res as resDays)
             setIsLoading(false)
         }

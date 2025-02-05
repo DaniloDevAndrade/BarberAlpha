@@ -28,13 +28,17 @@ import { planDays } from "../billing/api/planDays";
           const emailBusiness = session.user.email
           const res = await requestPlan(emailBusiness)  
             
-            if(res.plan?.name === "free"){
-              const plan = await planDays(emailBusiness)
+          if(res.planStatus?.status !== 'active'){
+            redirect('/dashboard/billing');
+          }
+
+          if(res.plan?.name === "free"){
+            const plan = await planDays(emailBusiness)
           
-              if(plan.days?.currentDay as number > 7) {
-                redirect('/dashboard/billing');
-              }
+            if(plan.days?.currentDay as number > 7) {
+              redirect('/dashboard/billing');
             }
+          }
     return (
       <SidebarProvider>
         <AppSidebar emailBusiness={emailBusiness} nameBusiness={nameBusiness} />

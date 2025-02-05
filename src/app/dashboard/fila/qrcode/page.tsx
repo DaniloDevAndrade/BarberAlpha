@@ -29,6 +29,10 @@ import { planDays } from "../../billing/api/planDays";
           
           const res = await requestPlan(emailBusiness)  
             
+          if(res.planStatus?.status !== 'active'){
+            redirect('/dashboard/billing');
+          }
+          
             if(res.plan?.name === "free"){
               const plan = await planDays(emailBusiness)
           

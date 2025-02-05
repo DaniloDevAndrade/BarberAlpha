@@ -29,6 +29,7 @@ export async function POST(req: Request) {
 
     switch(event.type){
         case 'customer.subscription.created':
+        case 'customer.subscription.deleted':
         case 'customer.subscription.updated':
             await handleProcessWebhookUpdatedSubscription(event.data)
             break

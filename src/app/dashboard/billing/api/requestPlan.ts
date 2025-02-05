@@ -8,6 +8,9 @@ type returnPlan = {
     plan?: {
         name: string
     }
+    planStatus?:{
+        status: string | null
+    }
     success?: boolean
     error?: {
         message: string
@@ -22,6 +25,8 @@ export async function requestPlan(emailBusiness: string): Promise<returnPlan> {
     if(!findBusiness) return {success: false, error:{message: "Barbearia não encontrada, faça login!"}}
 
     const plan = await getPlanByPrice(findBusiness.stripePriceId as string)
-
-    return {plan}
+    const planStatus = {
+        status: findBusiness.stripeSubscriptionStatus
+    } 
+    return {plan, planStatus}
 }

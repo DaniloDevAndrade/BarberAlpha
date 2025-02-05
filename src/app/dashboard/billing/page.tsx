@@ -27,7 +27,7 @@ import CardBillingPRO from "./components/card-billing-pro";
     
     const res = await requestPlan(emailBusiness)
 
-    if(res.plan?.name === "free")
+    if(res.plan?.name === "free" || res.planStatus?.status !== 'active')
     return (
       <SidebarProvider>
         <AppSidebar emailBusiness={emailBusiness} nameBusiness={nameBusiness} />
