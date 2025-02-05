@@ -39,7 +39,7 @@ export default function CardTable({emailBusiness}: DashboardClientProps) {
   }
 
   return (
-    <div className="w-screen">
+    <div className="w-screen xl:w-auto">
     <div className="flex m-3 flex-col gap-4 xl:grid xl:grid-cols-6">
         <Card>
                 <CardHeader>
