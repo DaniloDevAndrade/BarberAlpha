@@ -21,7 +21,7 @@ export default function Home() {
     {
       name: "Maria Oliveira",
       barbershop: "Corte & Charme",
-      text: "Desde que comecei a usar o Barber Alpha, minha agenda está sempre cheia e organizada. Recomendo a todos os barbeiros!",
+      text: "Desde que comecei a usar o Barber Alpha, minha agenda está sempre cheia e organizada. Recomendo a todos os barbeiros.",
       image: "/person3.png",
     },
     {
@@ -33,7 +33,7 @@ export default function Home() {
     {
       name: "Ana Rodrigues",
       barbershop: "Tesoura de Ouro",
-      text: "O Barber Alpha simplificou minha vida. Gerenciar minha barbearia nunca foi tão fácil e eficiente.",
+      text: "O Barber Alpha simplificou a minha vida. Gerenciar a minha barbearia nunca foi tão fácil e eficiente.",
       image: "/person4.png",
     },
     {
@@ -123,8 +123,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
           <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">Barber Alpha</h1>
           <p className="mt-6 text-xl text-gray-300 max-w-3xl">
-            Plataforma para o crescimento da sua barbearia. Gerencie clientes, horários, coloque filas dinamicas e aumente sua eficiência com nossa
-            plataforma intuitiva.
+          Plataforma para o crescimento da sua barbearia. Gerencie clientes, horários, coloque filas dinâmicas e aumente sua eficiência com nossa plataforma intuitiva.
           </p>
           <a
             href="/register"
@@ -140,7 +139,7 @@ export default function Home() {
             <div className="lg:text-center">
               <h2 className="text-base text-indigo-400 font-semibold tracking-wide uppercase">Recursos</h2>
               <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl">
-                Tudo que você precisa para gerenciar sua barbearia
+                Tudo o que você precisa para gerenciar sua barbearia de maneira eficiente e descomplicada!
               </p>
             </div>
 
@@ -155,7 +154,7 @@ export default function Home() {
                   <div className="ml-4">
                     <dt className="text-lg leading-6 font-medium">Fila dinamica.</dt>
                     <dd className="mt-2 text-base text-gray-400">
-                      Sistema de fila dinamica, gerencie sua fila e seu cliente espera no conforto da casa dele.
+                      Sistema de fila dinâmica: gerencie suas filas enquanto seus clientes aguardam no conforto de suas casas.
                     </dd>
                   </div>
                 </div>
@@ -169,7 +168,7 @@ export default function Home() {
                   <div className="ml-4">
                     <dt className="text-lg leading-6 font-medium">Gerenciamento de financeiro</dt>
                     <dd className="mt-2 text-base text-gray-400">
-                      Organize seu financeiro e evite gastos desnecessarios aumentando seu lucro e profissionalizando sua barbearia.
+                      Organize suas finanças, evite gastos desnecessários e aumente seu lucro, profissionalizando ainda mais a sua barbearia.
                     </dd>
                   </div>
                 </div>
@@ -183,7 +182,7 @@ export default function Home() {
                   <div className="ml-4">
                     <dt className="text-lg leading-6 font-medium">Gestão de clientes</dt>
                     <dd className="mt-2 text-base text-gray-400">
-                      Mantenha um registro detalhado dos seus clientes, incluindo preferências e histórico de serviços.
+                      Mantenha um registro detalhado dos seus clientes, incluindo suas preferências e o histórico de serviços prestados.
                     </dd>
                   </div>
                 </div>
@@ -197,7 +196,7 @@ export default function Home() {
                   <div className="ml-4">
                     <dt className="text-lg leading-6 font-medium">Profissionalize sua barberia</dt>
                     <dd className="mt-2 text-base text-gray-400">
-                      Com nossa plataforma você profissionaliza sua barbearia e se torna um negocio organizado e lucrativo!
+                      Com nossa plataforma, você profissionaliza sua barbearia e transforma seu negócio em uma empresa organizada e lucrativa!
                     </dd>
                   </div>
                 </div>
@@ -212,7 +211,7 @@ export default function Home() {
             <div className="lg:text-center mb-12">
               <h2 className="text-base text-indigo-400 font-semibold tracking-wide uppercase">Dashboard</h2>
               <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl">
-                Gerencie sua barbearia com facilidade
+                Gerencie sua barbearia com facilidade e eficiência!
               </p>
             </div>
             <div className="bg-gray-900 rounded-lg shadow-lg overflow-hidden">
@@ -236,7 +235,7 @@ export default function Home() {
             <div className="lg:text-center mb-12">
               <h2 className="text-base text-indigo-400 font-semibold tracking-wide uppercase">Depoimentos</h2>
               <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl">
-                O que nossos clientes dizem
+                Veja o que nossos clientes têm a dizer!
               </p>
             </div>
             <div className="relative">
@@ -283,21 +282,21 @@ export default function Home() {
               <div>
                 <h3 className="text-xl font-bold mb-2">Como funciona a fila dinamica online?</h3>
                 <p className="text-gray-400">
-                  Os clientes podem acessar sua página da fila atraves do QRCode ou Link, apos entrar nela o barbeiro terá ela em seu painel
-                  quando chegar a vez do cliente o barbeiro irá chamar ele no painel e de imediato chegara uma mensagem em seu whatsapp para se deslocar até
-                  a barbearia e realizar seu corte.
+                Os clientes podem acessar sua página da fila através de um QR Code ou link. Após entrarem nela, os barbeiros terão o acesso diretamente em 
+                seus painéis. Quando chegar a vez do cliente, o barbeiro irá notificá-lo pelo painel, e uma mensagem será enviada 
+                imediatamente para seu WhatsApp, informando-o para se deslocar até a barbearia e realizar seu corte.
                 </p>
               </div>
               <div>
                 <h3 className="text-xl font-bold mb-2">Como funciona o painel financeiro?</h3>
                 <p className="text-gray-400">
-                  O painel financeiro é baseado nas suas depesas que você pode registrar na aba Despesas e os valores de entrada é de acordo com a finalização de seus cortes, colocando o valor final.
+                  O painel financeiro é baseado nas suas despesas, que podem ser registradas na aba Despesas. Os valores de entrada são determinados pela finalização de seus cortes, onde você deve inserir o valor final de cada serviço realizado.
                 </p>
               </div>
               <div>
                 <h3 className="text-xl font-bold mb-2">Posso utilizar o celular para gerenciar minha barbearia?</h3>
                 <p className="text-gray-400">
-                Sim, o sistema do Barber Alpha foi criado justamente pensando nisso. Você tem total controle do sistema de sua barberia pelo celular!
+                  Sim! O sistema do Barber Alpha foi desenvolvido com esse objetivo em mente. Agora, você tem total controle da sua barbearia na palma da sua mão, diretamente pelo celular!
                 </p>
               </div>
             </div>
@@ -309,7 +308,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-24 lg:px-8 lg:flex lg:items-center lg:justify-between">
             <h2 className="text-3xl font-extrabold tracking-tight text-white md:text-4xl">
               <span className="block">Pronto para alavancar sua barbearia?</span>
-              <span className="block text-indigo-200">Começa utilizar os 7 dias gratis do Barber Alpha.</span>
+              <span className="block text-indigo-200">Comece a aproveitar agora mesmo os 7 dias grátis do Barber Alpha!</span>
             </h2>
             <div className="mt-8 flex flex-col sm:flex-row lg:mt-0 lg:flex-shrink-0">
               <div className="inline-flex rounded-md shadow">
